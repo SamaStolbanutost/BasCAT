@@ -1,2 +1,2 @@
-# BasCAT
-Cats are playing basketball! In online mode!
+# BasCAT 
+Cats are playing basketball! In multiplayer!

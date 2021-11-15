@@ -1,0 +1,307 @@
+[gd_scene load_steps=30 format=2]
+
+[ext_resource path="res://sprites/ball.png" type="Texture" id=1]
+[ext_resource path="res://sprites/ground.png" type="Texture" id=2]
+[ext_resource path="res://sprites/basket.png" type="Texture" id=3]
+[ext_resource path="res://sprites/basket_pillar.png" type="Texture" id=4]
+[ext_resource path="res://models/player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scripts/ball.gd" type="Script" id=6]
+[ext_resource path="res://sprites/underground.png" type="Texture" id=7]
+[ext_resource path="res://fonts/fff-forward.regular.ttf" type="DynamicFontData" id=8]
+[ext_resource path="res://scripts/game_controller.gd" type="Script" id=9]
+[ext_resource path="res://themes/basic.tres" type="Theme" id=10]
+[ext_resource path="res://sounds/kick.ogg" type="AudioStream" id=11]
+[ext_resource path="res://sounds/select.ogg" type="AudioStream" id=12]
+[ext_resource path="res://sounds/count.ogg" type="AudioStream" id=13]
+[ext_resource path="res://sounds/goal.ogg" type="AudioStream" id=14]
+[ext_resource path="res://sounds/start.ogg" type="AudioStream" id=15]
+[ext_resource path="res://sprites/home.png" type="Texture" id=16]
+[ext_resource path="res://sprites/ground_blank.png" type="Texture" id=17]
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+points = PoolVector2Array( 32, 0, 0, 0, 0, 32, 32, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=7]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="ConvexPolygonShape2D" id=12]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="TileSet" id=3]
+0/name = "ground.png 0"
+0/texture = ExtResource( 2 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 32, 32 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 2 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 2 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+1/name = "underground.png 1"
+1/texture = ExtResource( 7 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 0, 0, 32, 32 )
+1/tile_mode = 0
+1/occluder_offset = Vector2( 0, 0 )
+1/navigation_offset = Vector2( 0, 0 )
+1/shape_offset = Vector2( 0, 0 )
+1/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+1/shape = SubResource( 7 )
+1/shape_one_way = false
+1/shape_one_way_margin = 1.0
+1/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 7 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+1/z_index = 0
+2/name = "ground_blank.png 2"
+2/texture = ExtResource( 17 )
+2/tex_offset = Vector2( 0, 0 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 0, 0, 32, 32 )
+2/tile_mode = 0
+2/occluder_offset = Vector2( 0, 0 )
+2/navigation_offset = Vector2( 0, 0 )
+2/shape_offset = Vector2( 0, 0 )
+2/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+2/shape = SubResource( 12 )
+2/shape_one_way = false
+2/shape_one_way_margin = 1.0
+2/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 12 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+2/z_index = 0
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 32.0
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 74.25, 256 )
+
+[sub_resource type="RectangleShape2D" id=5]
+extents = Vector2( 92, 13 )
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 4, 16 )
+
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 649, 42 )
+
+[sub_resource type="DynamicFont" id=9]
+outline_size = 4
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 8 )
+
+[sub_resource type="Theme" id=10]
+default_font = SubResource( 9 )
+Label/fonts/font = null
+
+[sub_resource type="DynamicFont" id=11]
+size = 32
+outline_size = 6
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 8 )
+
+[node name="Gameplay" type="Node"]
+script = ExtResource( 9 )
+
+[node name="Map" type="Node2D" parent="."]
+
+[node name="Map" type="TileMap" parent="Map"]
+scale = Vector2( 2, 2 )
+tile_set = SubResource( 3 )
+cell_size = Vector2( 32, 32 )
+show_collision = true
+collision_bounce = 0.85
+format = 1
+tile_data = PoolIntArray( 589817, 2, 0, 589818, 2, 0, 589819, 2, 0, 589820, 2, 0, 589821, 2, 0, 589822, 2, 0, 589823, 2, 0, 524288, 2, 0, 524289, 2, 0, 524290, 2, 0, 524291, 2, 0, 524292, 2, 0, 524293, 2, 0, 524294, 2, 0, 524295, 2, 0, 524296, 2, 0, 524297, 2, 0, 524298, 2, 0, 524299, 2, 0, 524300, 2, 0, 524301, 2, 0, 524302, 2, 0, 524303, 2, 0, 524304, 2, 0, 524305, 2, 0, 524306, 2, 0, 524307, 2, 0, 524308, 2, 0, 524309, 2, 0, 524310, 2, 0, 524311, 2, 0, 524312, 2, 0, 524313, 2, 0, 524314, 2, 0, 655353, 1, 0, 655354, 1, 0, 655355, 1, 0, 655356, 1, 0, 655357, 1, 0, 655358, 1, 0, 655359, 1, 0, 589824, 1, 0, 589825, 1, 0, 589826, 1, 0, 589827, 1, 0, 589828, 1, 0, 589829, 1, 0, 589830, 1, 0, 589831, 1, 0, 589832, 1, 0, 589833, 1, 0, 589834, 1, 0, 589835, 1, 0, 589836, 1, 0, 589837, 1, 0, 589838, 1, 0, 589839, 1, 0, 589840, 1, 0, 589841, 1, 0, 589842, 1, 0, 589843, 1, 0, 589844, 1, 0, 589845, 1, 0, 589846, 1, 0, 589847, 1, 0, 589848, 1, 0, 589849, 1, 0, 589850, 1, 0, 720889, 1, 0, 720890, 1, 0, 720891, 1, 0, 720892, 1, 0, 720893, 1, 0, 720894, 1, 0, 720895, 1, 0, 655360, 1, 0, 655361, 1, 0, 655362, 1, 0, 655363, 1, 0, 655364, 1, 0, 655365, 1, 0, 655366, 1, 0, 655367, 1, 0, 655368, 1, 0, 655369, 1, 0, 655370, 1, 0, 655371, 1, 0, 655372, 1, 0, 655373, 1, 0, 655374, 1, 0, 655375, 1, 0, 655376, 1, 0, 655377, 1, 0, 655378, 1, 0, 655379, 1, 0, 655380, 1, 0, 655381, 1, 0, 655382, 1, 0, 655383, 1, 0, 655384, 1, 0, 655385, 1, 0, 655386, 1, 0, 786425, 1, 0, 786426, 1, 0, 786427, 1, 0, 786428, 1, 0, 786429, 1, 0, 786430, 1, 0, 786431, 1, 0, 720896, 1, 0, 720897, 1, 0, 720898, 1, 0, 720899, 1, 0, 720900, 1, 0, 720901, 1, 0, 720902, 1, 0, 720903, 1, 0, 720904, 1, 0, 720905, 1, 0, 720906, 1, 0, 720907, 1, 0, 720908, 1, 0, 720909, 1, 0, 720910, 1, 0, 720911, 1, 0, 720912, 1, 0, 720913, 1, 0, 720914, 1, 0, 720915, 1, 0, 720916, 1, 0, 720917, 1, 0, 720918, 1, 0, 720919, 1, 0, 720920, 1, 0, 720921, 1, 0, 720922, 1, 0, 851961, 1, 0, 851962, 1, 0, 851963, 1, 0, 851964, 1, 0, 851965, 1, 0, 851966, 1, 0, 851967, 1, 0, 786432, 1, 0, 786433, 1, 0, 786434, 1, 0, 786435, 1, 0, 786436, 1, 0, 786437, 1, 0, 786438, 1, 0, 786439, 1, 0, 786440, 1, 0, 786441, 1, 0, 786442, 1, 0, 786443, 1, 0, 786444, 1, 0, 786445, 1, 0, 786446, 1, 0, 786447, 1, 0, 786448, 1, 0, 786449, 1, 0, 786450, 1, 0, 786451, 1, 0, 786452, 1, 0, 786453, 1, 0, 786454, 1, 0, 786455, 1, 0, 786456, 1, 0, 786457, 1, 0, 786458, 1, 0, 917497, 1, 0, 917498, 1, 0, 917499, 1, 0, 917500, 1, 0, 917501, 1, 0, 917502, 1, 0, 917503, 1, 0, 851968, 1, 0, 851969, 1, 0, 851970, 1, 0, 851971, 1, 0, 851972, 1, 0, 851973, 1, 0, 851974, 1, 0, 851975, 1, 0, 851976, 1, 0, 851977, 1, 0, 851978, 1, 0, 851979, 1, 0, 851980, 1, 0, 851981, 1, 0, 851982, 1, 0, 851983, 1, 0, 851984, 1, 0, 851985, 1, 0, 851986, 1, 0, 851987, 1, 0, 851988, 1, 0, 851989, 1, 0, 851990, 1, 0, 851991, 1, 0, 851992, 1, 0, 851993, 1, 0, 851994, 1, 0, 983033, 1, 0, 983034, 1, 0, 983035, 1, 0, 983036, 1, 0, 983037, 1, 0, 983038, 1, 0, 983039, 1, 0, 917504, 1, 0, 917505, 1, 0, 917506, 1, 0, 917507, 1, 0, 917508, 1, 0, 917509, 1, 0, 917510, 1, 0, 917511, 1, 0, 917512, 1, 0, 917513, 1, 0, 917514, 1, 0, 917515, 1, 0, 917516, 1, 0, 917517, 1, 0, 917518, 1, 0, 917519, 1, 0, 917520, 1, 0, 917521, 1, 0, 917522, 1, 0, 917523, 1, 0, 917524, 1, 0, 917525, 1, 0, 917526, 1, 0, 917527, 1, 0, 917528, 1, 0, 917529, 1, 0, 917530, 1, 0, 1048569, 1, 0, 1048570, 1, 0, 1048571, 1, 0, 1048572, 1, 0, 1048573, 1, 0, 1048574, 1, 0, 1048575, 1, 0, 983040, 1, 0, 983041, 1, 0, 983042, 1, 0, 983043, 1, 0, 983044, 1, 0, 983045, 1, 0, 983046, 1, 0, 983047, 1, 0, 983048, 1, 0, 983049, 1, 0, 983050, 1, 0, 983051, 1, 0, 983052, 1, 0, 983053, 1, 0, 983054, 1, 0, 983055, 1, 0, 983056, 1, 0, 983057, 1, 0, 983058, 1, 0, 983059, 1, 0, 983060, 1, 0, 983061, 1, 0, 983062, 1, 0, 983063, 1, 0, 983064, 1, 0, 983065, 1, 0, 983066, 1, 0 )
+
+[node name="Player" parent="Map" instance=ExtResource( 5 )]
+position = Vector2( 800, 380 )
+
+[node name="Ball" type="RigidBody2D" parent="Map" groups=["ball"]]
+position = Vector2( 640, 200 )
+mode = 1
+mass = 2.8
+gravity_scale = 9.8
+contacts_reported = 1
+contact_monitor = true
+script = ExtResource( 6 )
+
+[node name="Sprite" type="Sprite" parent="Map/Ball"]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Ball"]
+shape = SubResource( 1 )
+
+[node name="LeftBasket" type="Node2D" parent="Map"]
+
+[node name="Pillar" type="StaticBody2D" parent="Map/LeftBasket"]
+
+[node name="Sprite" type="Sprite" parent="Map/LeftBasket/Pillar"]
+position = Vector2( 65, 320 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/LeftBasket/Pillar"]
+position = Vector2( 34, 248 )
+shape = SubResource( 4 )
+
+[node name="Basket" type="StaticBody2D" parent="Map/LeftBasket"]
+
+[node name="Sprite" type="Sprite" parent="Map/LeftBasket/Basket"]
+position = Vector2( 208, 192 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="Map/LeftBasket/Basket"]
+position = Vector2( 188, 199 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/LeftBasket/Basket/Area2D"]
+position = Vector2( 16, -2 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/LeftBasket/Basket"]
+position = Vector2( 300, 198 )
+shape = SubResource( 6 )
+
+[node name="RightBasket" type="Node2D" parent="Map"]
+position = Vector2( 1280, 0 )
+scale = Vector2( -1, 1 )
+
+[node name="Pillar" type="StaticBody2D" parent="Map/RightBasket"]
+
+[node name="Sprite" type="Sprite" parent="Map/RightBasket/Pillar"]
+position = Vector2( 65, 320 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/RightBasket/Pillar"]
+position = Vector2( 42.75, 256 )
+shape = SubResource( 4 )
+
+[node name="Basket" type="StaticBody2D" parent="Map/RightBasket"]
+
+[node name="Sprite" type="Sprite" parent="Map/RightBasket/Basket"]
+position = Vector2( 208, 192 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="Map/RightBasket/Basket"]
+position = Vector2( 188, 199 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/RightBasket/Basket/Area2D"]
+position = Vector2( 19.5, -1 )
+shape = SubResource( 5 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/RightBasket/Basket"]
+position = Vector2( 300, 198 )
+shape = SubResource( 6 )
+
+[node name="Top" type="StaticBody2D" parent="Map"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/Top"]
+position = Vector2( 639, -52 )
+shape = SubResource( 8 )
+
+[node name="UI" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Text" type="Control" parent="UI"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Score" type="Label" parent="UI/Text"]
+margin_top = -8.0
+margin_right = 1282.0
+margin_bottom = 147.0
+theme = SubResource( 10 )
+custom_fonts/font = SubResource( 11 )
+text = "2 : 0"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ready" type="Label" parent="UI/Text"]
+margin_right = 1300.0
+margin_bottom = 712.0
+theme = ExtResource( 10 )
+text = "3.."
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Buttons" type="Control" parent="UI"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Home" type="Control" parent="UI/Buttons"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Training" type="TextureButton" parent="UI/Buttons/Home"]
+margin_left = 1150.0
+margin_top = 20.0
+margin_right = 1182.0
+margin_bottom = 52.0
+rect_scale = Vector2( 3, 3 )
+texture_normal = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="KickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 11 )
+
+[node name="GoalSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 14 )
+
+[node name="CountSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+autoplay = true
+
+[node name="SelectSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+
+[node name="StartSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 15 )
+
+[connection signal="start" from="." to="Map/Ball" method="start"]
+[connection signal="stop" from="." to="Map/Ball" method="stop"]
+[connection signal="body_entered" from="Map/Ball" to="." method="ball_collided"]
+[connection signal="body_entered" from="Map/LeftBasket/Basket/Area2D" to="." method="goal" binds= [ "left" ]]
+[connection signal="body_entered" from="Map/RightBasket/Basket/Area2D" to="." method="goal" binds= [ "right" ]]
+[connection signal="mouse_entered" from="UI/Buttons/Home/Training" to="." method="selected_button"]
+[connection signal="pressed" from="UI/Buttons/Home/Training" to="." method="home"]
